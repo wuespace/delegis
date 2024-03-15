@@ -5,7 +5,7 @@
   title: "Vereinsordnung zu ABCDEF",
   abbrev: "ABCDEFVO",
   resolution: "3. Beschluss des Vorstands vom 24.01.2024",
-  inEffect: "24.01.2024",
+  in-effect: "24.01.2024",
   draft: false,
   // Template
   logo: image("wuespace.jpg", alt: "WüSpace e. V."),
@@ -37,9 +37,11 @@ Fußnoten dienen als redaktionelle Anmerkungen oder Interpretationshilfen und si
 
 § 1 Grundlegendes
 
-(1) #lorem(20)
+(1)
+#lorem(20)
 
-(2) #s~#lorem(10)
+(2)
+#s~#lorem(10)
 #s~#lorem(10)
 
 § 2 Bestimmungen
@@ -50,7 +52,9 @@ Fußnoten dienen als redaktionelle Anmerkungen oder Interpretationshilfen und si
 
 § 2a Ergänzende Bestimmungen
 
-(1) #lorem(5)
+(1)
+#lorem(5)
 
-(2) #s~#lorem(3) 
+(2)
+#s~#lorem(3) 
 #s~#lorem(8)

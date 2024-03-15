@@ -7,9 +7,9 @@
 #let delegis = (
   // Metadata
   title : "Vereinsordnung zur IT-Infrastruktur",
-  abbrev : "ITVO",
+  abbreviation : "ITVO",
   resolution : "3. Beschluss des Vorstands vom 24.01.2024",
-  inEffect : "24.01.2024",
+  in-effect : "24.01.2024",
   draft : false,
   // Template
   logo : none,
@@ -18,13 +18,13 @@
   font : "Atkinson Hyperlegible",
   lang : "de",
   paper: "a5",
-  strDraft : "Entwurf",
-  strIntro : (resolution, inEffect) => [Mit Beschluss (#resolution) tritt zum #inEffect in Kraft:],
+  str-draft : "Entwurf",
+  str-intro : (resolution, in-effect) => [Mit Beschluss (#resolution) tritt zum #in-effect in Kraft:],
   // Content
   body
 ) => [
   /// General Formatting
-  #set document(title: title + " (" + abbrev + ")", keywords: (title, abbrev, resolution, inEffect))
+  #set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
   
   #let bg = if draft {
     rotate(45deg, text(100pt, fill: luma(85%), font: font, strDraft))
@@ -91,8 +91,8 @@
   
     show par: set block(spacing: .6em)
   
-    if draft { text[#strDraft:] } else { par(text(strIntro(resolution, inEffect))) }
-    par(text(2em, strong[#title~(#abbrev)]), leading: 0.6em)
+    if draft { text[#str-draft:] } else { par(text(str-intro(resolution, in-effect))) }
+    par(text(2em, strong[#title~(#abbreviation)]), leading: 0.6em)
     v(3cm)
   })
 
