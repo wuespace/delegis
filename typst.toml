@@ -1,0 +1,14 @@
+[package]
+name = "delegis"
+version = "0.1.0"
+entrypoint = "delegis.typ"
+authors = ["WüSpace e. V. <https://github.com/wuespace>"]
+license = "MIT"
+description = "A package and template for drafting legislative content in a German-style structuring, such as for bylaws, etc."
+categories = ["office"]
+disciplines = ["law"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
