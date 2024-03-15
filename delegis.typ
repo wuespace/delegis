@@ -4,7 +4,7 @@
 #let unnumbered = (it, ..rest) => heading(level: 6, numbering: none, ..rest, it)
 
 // template
-#let project = (
+#let delegis = (
   // Metadata
   title : "Vereinsordnung zur IT-Infrastruktur",
   abbrev : "ITVO",

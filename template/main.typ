@@ -1,6 +1,6 @@
 #import "@preview/delegis:0.1.0": *
 
-#show: it => project(
+#show: it => delegis(
   // Metadata
   title: "Vereinsordnung zu ABCDEF",
   abbrev: "ABCDEFVO",
