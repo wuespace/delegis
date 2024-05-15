@@ -58,3 +58,7 @@ Fußnoten dienen als redaktionelle Anmerkungen oder Interpretationshilfen und si
 (2)
 #s~#lorem(3) 
 #s~#lorem(8)
+
+#section[§ 3][Administrator*innen]
+
+#lorem(30)

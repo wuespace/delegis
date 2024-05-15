@@ -60,6 +60,12 @@ Sie kann jederzeit gekündigt werden.
 Die Ehrenmitgliedschaft wird durch den Vorstand verliehen.
 ```
 
+Alternatively (or if you want to use special characters otherwise not supported, such as `*`), you can also use the `#section[number][title]` function:
+
+```typst
+#section[§ 3][Administrator*innen]
+```
+
 ### Overarching Sections
 
 If you want to add more structure to your sections, you can use normal Typst headings. Note that only the level 6 headings are reserved for the section numbers:
@@ -102,3 +108,24 @@ In some cases, referencing sections using `§ X` could be mis-interpreted as a n
 
 Diese Ordnung tritt am 24.01.2024 in Kraft. §~4 bleibt unberührt.
 ```
+
+## Changelog
+
+### v0.2.0
+
+#### Features
+- Add `#metadata` fields for usage with `typst query`. You can now use `typst query file.typ "<field>" --field value --one` with `<field>` being one of the following to query metadata fields in the command line:
+  - `<title>`
+  - `<abbreviation>`
+  - `<resolution>`
+  - `<in-effect>`
+- Add `#section[§ 1][ABC]` function to enable previously unsupported special chars (such as `*`) in section headings. Note that this was previously possible using `#unnumbered[§ 1\ ABC]`, but the new function adds a semantically better-fitting alternative to this fix.
+- Improve heading style rules. This also fixes an incompatibility with `pandoc`, meaning it's now possible to use `pandoc` to convert delegis documents to HTML, etc.
+- Set the footnote numbering to `[1]` to not collide with sentence numbers.
+#### Bug Fixes
+- Fix a typo in the `str-draft` variable name that lead to draft documents resulting in a syntax error.
+- Fix hyphenation issues with the abbreviation on the title page (hyphenation between the parentheses and the abbreviation itself)
+
+### v0.1.0
+
+Initial Release
