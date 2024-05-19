@@ -16,16 +16,16 @@ fi
 cd "$(dirname "$0")"
 
 # Ensure git status is clean and up-to-date
-# if ! git diff-index --quiet HEAD --; then
-# 	echo "There are uncommitted changes in the repository"
-# 	exit 1
-# fi
+if ! git diff-index --quiet HEAD --; then
+	echo "There are uncommitted changes in the repository"
+	exit 1
+fi
 
-# git fetch
-# if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
-# 	echo "The local branch is not up-to-date with the remote branch"
-# 	exit 1
-# fi
+git fetch
+if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
+	echo "The local branch is not up-to-date with the remote branch"
+	exit 1
+fi
 
 # Run typst compile command
 typst compile template/main.typ demo-{n}.png
@@ -41,6 +41,6 @@ done
 cp demo-3.png thumbnail.png
 
 # Commit and push changes
-# git add .
-# git commit -m "Update preview assets"
-# git push
+git add .
+git commit -m "Update preview assets"
+git push
