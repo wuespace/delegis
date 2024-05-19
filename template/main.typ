@@ -1,4 +1,4 @@
-#import "@preview/delegis:0.2.0": *
+#import "@preview/delegis:0.3.0": *
 
 #show: it => delegis(
   // Metadata

@@ -1,3 +1,8 @@
+// Copyright (c) 2024 WüSpace e. V.
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 // sentence number substitution marker
 #let s = "XXXXXXSENTENCEXXXNUMBERXXXXXX"
 

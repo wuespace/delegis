@@ -1,6 +1,6 @@
 [package]
 name = "delegis"
-version = "0.2.0"
+version = "0.3.0"
 entrypoint = "delegis.typ"
 authors = ["WüSpace e. V. <https://github.com/wuespace>"]
 repository = "https://github.com/wuespace/delegis"
