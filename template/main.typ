@@ -1,6 +1,6 @@
 #import "@preview/delegis:0.3.0": *
 
-#show: it => delegis(
+#show: delegis.with(
   // Metadata
   title: "Vereinsordnung zu ABCDEF",
   abbreviation: "ABCDEFVO",
@@ -9,8 +9,6 @@
   draft: false,
   // Template
   logo: image("wuespace.jpg", alt: "WüSpace e. V."),
-  // Content
-  it
 )
 
 /// Usage

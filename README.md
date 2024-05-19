@@ -25,7 +25,7 @@ While this `README.md` gives you a brief overview of the package's usage, we rec
 ### Initializing the template
 
 ```typst
-#show: it => delegis(
+#show: delegis.with(
   // Metadata
   title: "Vereinsordnung zu ABCDEF", // title of the law/bylaw/...
   abbreviation: "ABCDEFVO", // abbreviation of the law/bylaw/...
@@ -34,8 +34,6 @@ While this `README.md` gives you a brief overview of the package's usage, we rec
   draft: false, // whether this is a draft
   // Template
   logo: image("wuespace.jpg", alt: "WüSpace e. V."), // logo of the organization, shown on the first page
-  // Content
-  it
 )
 ```
 
@@ -72,7 +70,7 @@ Alternatively (or if you want to use special characters otherwise not supported,
 #section[§ 3][Administrator*innen]
 ```
 
-### Overarching Sections
+### Hierarchical Divisions
 
 If you want to add more structure to your sections, you can use normal Typst headings. Note that only the level 6 headings are reserved for the section numbers:
 
@@ -88,6 +86,14 @@ If you want to add more structure to your sections, you can use normal Typst hea
 § 3 GHI
 
 § 4 JKL
+```
+
+Delegis will automatically use a numbering scheme for the divisions that is in line with the "Handbuch der Rechtsförmlichkeit", Rn. 379 f. If you want to customize the division titles, you can do so by setting the `division-prefixes` parameter in the `delegis` function:
+
+```typst
+#show: delegis.with(
+  division-prefixes: ("Teil", "Kapitel", "Abschnitt", "Unterabschnitt")
+)
 ```
 
 ### Sentence Numbering
