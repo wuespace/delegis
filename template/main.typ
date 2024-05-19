@@ -43,6 +43,12 @@ Fußnoten dienen als redaktionelle Anmerkungen oder Interpretationshilfen und si
 (2)
 #s~#lorem(10)
 #s~#lorem(10)
+#s~Das beinhaltet
++ Listenelemente,
++ weitere Listenelemente, wie zum Beispiel
+  + Kind-Listenelemente,
+  + weitere Kind-Listenelemente, sowie
++ ein letztes Listenelement.
 
 § 2 Bestimmungen
 
@@ -56,7 +62,7 @@ Fußnoten dienen als redaktionelle Anmerkungen oder Interpretationshilfen und si
 #lorem(5)
 
 (2)
-#s~#lorem(3) 
+#s~#lorem(3)
 #s~#lorem(8)
 
 #section[§ 3][Administrator*innen]
