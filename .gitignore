@@ -2,7 +2,7 @@
 .DS_Store
 
 # demo assets
-demo-*.svg
-!demo-1.svg
-!demo-2.svg
-!demo-3.svg
+demo-*.png
+!demo-1.png
+!demo-2.png
+!demo-3.png
