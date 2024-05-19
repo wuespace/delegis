@@ -1,5 +1,5 @@
 // Copyright (c) 2024 WüSpace e. V.
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -19,6 +19,10 @@
   ..rest,
 )
 
+/// Division prefixes for different languages.
+#let division-prefixes-de = ("Teil", "Kapitel", "Abschnitt", "Unterabschnitt")
+#let division-prefixes-en = ("Part", "Chapter", "Division", "Subdivision")
+
 /// Initialize a delegis document.
 #let delegis = (
   // Metadata
@@ -34,11 +38,21 @@
   font : "Atkinson Hyperlegible",
   lang : "de",
   paper: "a5",
+  division-prefixes: none, // use language-specific prefixes by default
   str-draft : "Entwurf",
   str-intro : (resolution, in-effect) => [Mit Beschluss (#resolution) tritt zum #in-effect in Kraft:],
   // Content
   body
 ) => {
+  /// Language-specific division prefixes
+  let division-prefixes = if division-prefixes != none {
+    division-prefixes
+  } else if lang == "en" {
+    division-prefixes-en
+  } else {
+    division-prefixes-de // default to German
+  }
+
   /// Metadata
   set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
 
@@ -64,7 +78,30 @@
   }
 
   /// Heading Formatting
-  set heading(numbering: "I.1.A.i.a.")
+  set heading(numbering: (..nums) => {
+    // Handbuch der Rechtsförmlichkeit, Rn. 379 f.
+    // After the final named level, use "X.X.X" for the numbering using the final prefix
+    nums = nums.pos()
+
+    let level = nums.len() // level of the heading
+    let number = nums.slice(calc.min(
+      division-prefixes.len(),
+      level,
+    ) - 1)
+
+    let prefix = division-prefixes.at(
+      calc.min(
+        level - 1,
+        division-prefixes.len() - 1,
+      ),
+    )
+
+    let str-number = numbering("1.1", ..number)
+
+    [
+      #prefix #str-number:
+    ]
+  })
   show heading: set align(center)
   show heading: set text(size: size, weight: "regular")
 
@@ -76,7 +113,7 @@
 
   show heading.where(level: 6): set text(weight: "bold")
 
-	// Enumeration numbering
+  // Enumeration numbering
   // 1. -> a) -> aa) -(unofficial)-> (1) -> i. -> i.i. -> ...
   // Handbuch der Rechtsförmlichkeit, Rn. 374
   set enum(

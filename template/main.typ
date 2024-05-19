@@ -16,6 +16,7 @@
 /// Usage
 //
 //  "§ 123abc Section title" for a section "§ 123abc" with the title "Section title"
+//  "#section[§ 123abc][Section title]" for the same section
 //  "#s~" for sentence numbers in multi-sentence paragraphs
 //  (normal Typst headings) such as "= ABC" for grouping sections together
 //
