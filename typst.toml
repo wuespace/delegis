@@ -8,6 +8,7 @@ license = "MIT"
 description = "A package and template for drafting legislative content in a German-style structuring, such as for bylaws, etc."
 categories = ["office"]
 disciplines = ["law"]
+exclude = ["demo-*.png", "*.sh"]
 
 [template]
 path = "template"

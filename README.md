@@ -1,6 +1,12 @@
 # delegis
 
-![A page containing placeholder text in a German § / (1) / Sentence Number structured way.](thumbnail.png)
+<table>
+<tr>
+<td><img src="demo-1.png" alt="Page containing a logo at the top-right and a geric (example) title"></td>
+<td><img src="demo-2.png" alt="Page containing an outline"></td>
+<td><img src="demo-3.png" alt="Page containing a German-style legislative content including a preamble, division titles, sections, paragraph and sentence numbering, etc."></td>
+</tr>
+</table>
 
 A package and template for drafting legislative content in a German-style structuring, such as for bylaws, etc.
 
