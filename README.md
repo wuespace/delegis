@@ -122,6 +122,7 @@ Diese Ordnung tritt am 24.01.2024 in Kraft. §~4 bleibt unberührt.
 #### Features
 
 - Adjust numbered list / enumeration numbering to be in line with "Handbuch der Rechtsförmlichkeit", Rn. 374
+- Make division titles (e.g., "Part", "Chapter", "Division") customizable and conform to the "Handbuch der Rechtsförmlichkeit", Rn. 379 f.
 
 ### v0.2.0
 
