@@ -7,7 +7,12 @@
 
 /// Manually create a section. Useful when unsupported characters are used in the heading.
 /// Usage: `#section[§ 3][Administrator*innen]`
-#let section = (number, it, ..rest) => unnumbered({number + "\n" + it}, ..rest)
+#let section = (number, it, ..rest) => unnumbered(
+  {
+    number + "\n" + it
+  },
+  ..rest,
+)
 
 /// Initialize a delegis document.
 #let delegis = (
@@ -31,29 +36,33 @@
 ) => {
   /// Metadata
   set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
-  
+
   /// General Formatting
   let bg = if draft {
     rotate(45deg, text(100pt, fill: luma(85%), font: font, str-draft))
-  } else {}
-  
+  }
+
   set page(paper: paper, numbering: "1 / 1", background: bg)
   set text(hyphenate: true, lang: lang, size: size, font: font)
 
   /// Clause Detection
   show regex("§ ([0-9a-zA-Z]+) (.+)$"): it => {
     let (_, number, ..rest) = it.text.split()
-  
-    heading(level: 6, numbering: none, {
-      "§ " + number + "\n" + rest.join(" ")
-    })
+
+    heading(
+      level: 6,
+      numbering: none,
+      {
+        "§ " + number + "\n" + rest.join(" ")
+      },
+    )
   }
 
   /// Heading Formatting
   set heading(numbering: "I.1.A.i.a.")
   show heading: set align(center)
   show heading: set text(size: size, weight: "regular")
-  
+
   show heading.where(level: 1): set text(style: "italic")
   show heading.where(level: 2): set text(style: "italic")
   show heading.where(level: 3): set text(style: "italic")
@@ -61,14 +70,36 @@
   show heading.where(level: 5): set text(style: "italic")
 
   show heading.where(level: 6): set text(weight: "bold")
-  
+
+	// Enumeration numbering
+  // 1. -> a) -> aa) -(unofficial)-> (1) -> i. -> i.i. -> ...
+  // Handbuch der Rechtsförmlichkeit, Rn. 374
+  set enum(
+    numbering: (..numbers) => {
+      let nums = numbers.pos()
+      if (nums.len() == 1) {
+        return numbering("1.", ..nums)
+      } else if (nums.len() == 2) {
+        return numbering("a)", ..nums.slice(1))
+      } else if (nums.len() == 3) {
+        let letter = numbering("a", ..nums.slice(2))
+        return [ #letter#letter) ]
+      } else if (nums.len() == 4) {
+        return numbering("(1)", ..nums.slice(3))
+      } else {
+        return numbering("i.", ..nums.slice(4))
+      }
+    },
+    full: true, // get full number arrays passed into the numbering function
+  )
+
   /// Outlines
   show outline.entry: it => {
-    show linebreak: it => {} // disable manual line breaks
+    show linebreak: it => { } // disable manual line breaks
     show "\n": " " // disable section number line breaks
     it
   }
-  
+
   set outline(indent: 1cm)
   show outline: it => {
     it
@@ -80,29 +111,32 @@
     counter("sentence").step()
     super(strong(counter("sentence").display()))
   }
-  
+
   show parbreak: it => {
     counter("sentence").update(0)
     it
   }
-  
+
   /// Title Page
-  page(numbering: none, {
-    place(top + right, block(width: 2cm, logo))
-    v(1fr)
-  
-    show par: set block(spacing: .6em)
-  
-    if draft {
-      text[#str-draft:] 
-    } else {
-      par(text(str-intro(resolution, in-effect))) 
-    }
-    
-    par(text(2em, strong[#title (#abbreviation)]), leading: 0.6em)
-    
-    v(3cm)
-  })
+  page(
+    numbering: none,
+    {
+      place(top + right, block(width: 2cm, logo))
+      v(1fr)
+
+      show par: set block(spacing: .6em)
+
+      if draft {
+        text[#str-draft:]
+      } else {
+        par(text(str-intro(resolution, in-effect)))
+      }
+
+      par(text(2em, strong[#title (#abbreviation)]), leading: 0.6em)
+
+      v(3cm)
+    },
+  )
 
   // Metadata once again. Needs to be down here to have the page size set.
   // Can be used with `typst query`, e.g.:
