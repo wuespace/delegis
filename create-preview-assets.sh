@@ -1,4 +1,11 @@
 #!/bin/bash
+# Copyright (c) 2024 WüSpace e. V.
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+#
+# This script creates preview assets for the template.
+# It compiles the template using typst and generates demo-{1-3}.png files as well as a thumbnail.png file.
 
 # Check if typst command is available
 if ! command -v typst >/dev/null 2>&1; then
