@@ -41,10 +41,10 @@ done
 cp demo-3.png thumbnail.png
 
 # Commit and push changes
+git add .
 if git diff-index --quiet HEAD --; then
 	echo "No changes to commit"
 else
-	git add .
 	git commit -m "Update preview assets"
 	git push
 	echo "Changes were committed and pushed"
