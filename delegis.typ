@@ -27,7 +27,7 @@
 #let delegis = (
   // Metadata
   title : "Vereinsordnung zur IT-Infrastruktur",
-  abbreviation : "ITVO",
+  abbreviation : none,
   resolution : "3. Beschluss des Vorstands vom 24.01.2024",
   in-effect : "24.01.2024",
   draft : false,
@@ -54,7 +54,11 @@
   }
 
   /// Metadata
-  set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
+  if abbreviation == none {
+    set document(title: title, keywords: (title, resolution, in-effect))
+  } else {
+    set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
+  }
 
   /// General Formatting
   let bg = if draft {
@@ -174,7 +178,11 @@
         par(text(str-intro(resolution, in-effect)))
       }
 
-      par(text(2em, strong[#title (#abbreviation)]), leading: 0.6em)
+      if abbreviation == none {
+        par(text(2em, strong[#title]), leading: 0.6em)
+      } else {
+        par(text(2em, strong[#title (#abbreviation)]), leading: 0.6em)
+      }
 
       v(3cm)
     },
