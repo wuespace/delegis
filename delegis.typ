@@ -8,8 +8,25 @@
 
 /// Create an unmarkes section, such as a preamble.
 /// Usage: `#unnumbered[Preamble]`
-#let unnumbered = (it, ..rest) => heading(level: 6, numbering: none, ..rest, it)
+#let unnumbered = (it, ..rest) => context({
+  
+  let h-elem = selector(heading).before(here())
 
+  let c = counter(h-elem).get()
+  let depth = if c == none {
+    // Unlikely case: No counter found at all
+    1
+  } else if c.at(0) == 0 {
+    // We're before the first sectional level, so use level 1
+    1
+  } else {
+    // Use the current depth + 1 to be one level below the current depth
+    c.len() + 1
+  }
+
+  show heading: set text(style: "normal", weight: "bold")
+  heading(level: depth, numbering: none, ..rest, it)
+})
 /// Manually create a section. Useful when unsupported characters are used in the heading.
 /// Usage: `#section[§ 3][Administrator*innen]`
 #let section = (number, it, ..rest) => unnumbered(
@@ -68,13 +85,7 @@
   show regex("§ ([0-9a-zA-Z]+) (.+)$"): it => {
     let (_, number, ..rest) = it.text.split()
 
-    heading(
-      level: 6,
-      numbering: none,
-      {
-        "§ " + number + "\n" + rest.join(" ")
-      },
-    )
+    section("§ " + number, rest.join(" "))
   }
 
   /// Heading Formatting
@@ -110,8 +121,6 @@
   show heading.where(level: 3): set text(style: "italic")
   show heading.where(level: 4): set text(style: "italic")
   show heading.where(level: 5): set text(style: "italic")
-
-  show heading.where(level: 6): set text(weight: "bold")
 
   // Enumeration numbering
   // 1. -> a) -> aa) -(unofficial)-> (1) -> i. -> i.i. -> ...
@@ -166,7 +175,7 @@
       place(top + right, block(width: 2cm, logo))
       v(1fr)
 
-      show par: set block(spacing: .6em)
+      set par(spacing: .6em)
 
       if draft {
         text[#str-draft:]
