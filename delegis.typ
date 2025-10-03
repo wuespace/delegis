@@ -151,7 +151,7 @@
   /// Sentence Numbering
   show regex(s): it => {
     counter("sentence").step()
-    super(strong(counter("sentence").display()))
+    super(strong(context(counter("sentence").display())))
   }
 
   show parbreak: it => {
