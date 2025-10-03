@@ -1,4 +1,4 @@
-#import "@preview/delegis:0.3.0": *
+#import "../delegis.typ": *
 
 #show: delegis.with(
   // Metadata
