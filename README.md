@@ -28,7 +28,7 @@ While this `README.md` gives you a brief overview of the package's usage, we rec
 #show: delegis.with(
   // Metadata
   title: "Vereinsordnung zu ABCDEF", // title of the law/bylaw/...
-  abbreviation: "ABCDEFVO", // abbreviation of the law/bylaw/...
+  abbreviation: "ABCDEFVO", // abbreviation of the law/bylaw/... (can be none)
   resolution: "3. Beschluss des Vorstands vom 24.01.2024", // resolution number and date
   in-effect: "24.01.2024", // date when it comes into effect
   draft: false, // whether this is a draft
@@ -122,6 +122,17 @@ Diese Ordnung tritt am 24.01.2024 in Kraft. §~4 bleibt unberührt.
 ```
 
 ## Changelog
+
+### v0.4.0
+
+#### Features
+
+- Improve heading levels to follow accessibility best practices (no longer skipping levels)
+- Make the `abbreviation` metadata field optional (can be `none` now)
+
+#### Bug Fixes
+
+- Fix sentence numbering for newer Typst versions (that require `context` for the numbering to work properly)
 
 ### v0.3.0
 
