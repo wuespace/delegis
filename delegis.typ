@@ -1,4 +1,4 @@
-// Copyright (c) 2024 WüSpace e. V.
+// Copyright (c) 2025 WüSpace e. V.
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
@@ -10,9 +10,14 @@
 /// Usage: `#unnumbered[Preamble]`
 #let unnumbered = (it, ..rest) => context({
   
+  // Determine the current heading level to create a heading one level below.
+  // Previous heading element
   let h-elem = selector(heading).before(here())
 
+  // Current heading level
   let c = counter(h-elem).get()
+
+  // Depth to use for the new heading
   let depth = if c == none {
     // Unlikely case: No counter found at all
     1
@@ -24,6 +29,7 @@
     c.len() + 1
   }
 
+  // Actually show the heading
   show heading: set text(style: "normal", weight: "bold")
   heading(level: depth, numbering: none, ..rest, it)
 })
@@ -44,7 +50,7 @@
 #let delegis = (
   // Metadata
   title : "Vereinsordnung zur IT-Infrastruktur",
-  abbreviation : "ITVO",
+  abbreviation : none,
   resolution : "3. Beschluss des Vorstands vom 24.01.2024",
   in-effect : "24.01.2024",
   draft : false,
@@ -71,7 +77,16 @@
   }
 
   /// Metadata
-  set document(title: title + " (" + abbreviation + ")", keywords: (title, abbreviation, resolution, in-effect))
+  let full-title = if abbreviation != none {
+    title + " (" + abbreviation + ")"
+  } else {
+    title
+  }
+  set document(
+    title: full-title, 
+    keywords: (title, abbreviation, resolution, in-effect).filter(it => it != none),
+    description: str-intro(resolution, in-effect) + " " + full-title,
+  )
 
   /// General Formatting
   let bg = if draft {
@@ -183,7 +198,7 @@
         par(text(str-intro(resolution, in-effect)))
       }
 
-      par(text(2em, strong[#title (#abbreviation)]), leading: 0.6em)
+      par(text(2em, strong(full-title)), leading: 0.6em)
 
       v(3cm)
     },
