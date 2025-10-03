@@ -35,7 +35,7 @@ if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
 fi
 
 # Run typst compile command
-typst compile template/main.typ demo-{n}.png
+typst compile --root . template/main.typ demo-{n}.png
 
 # Delete demo-{n}.png with {n} > 3 if they exist
 for ((n=4; n<=10; n++)); do
